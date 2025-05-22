@@ -97,6 +97,7 @@ export default function Pets() {
             <div className="card-details">
               <h3>{pet.name}</h3>
               <p className="type">{pet.type}</p>
+              {pet.address && <p className="address">{pet.address}</p>}
             </div>
           </li>
         ))}
