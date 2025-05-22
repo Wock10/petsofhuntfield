@@ -27,7 +27,7 @@ async function uploadImage(base64) {
     Key: key,
     Body: data,
     ContentType: contentType,
-    ACL: 'public-read',
+    // ACL: 'public-read', // <-- REMOVED
   };
   await s3.putObject(params).promise();
   return `https://${BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/${key}`;
