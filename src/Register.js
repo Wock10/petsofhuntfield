@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './Register.css';
+import { COMMON_PETS } from './petTypes';
 
 export default function Register({ onCancel, onCreated }) {
   const [name, setName] = useState('');
@@ -72,13 +73,18 @@ export default function Register({ onCancel, onCreated }) {
         onChange={(e) => setName(e.target.value)}
         required
       />
-      <input
-        type="text"
-        placeholder="Type"
+      <select
         value={type}
         onChange={(e) => setType(e.target.value)}
         required
-      />
+      >
+        <option value="">Select Type</option>
+        {COMMON_PETS.map((petType) => (
+          <option key={petType} value={petType}>
+            {petType}
+          </option>
+        ))}
+      </select>
       <input
         type="file"
         multiple
