@@ -8,6 +8,7 @@ export default function Register({ onCancel, onCreated }) {
   const [address, setAddress] = useState('');
   const [contact, setContact] = useState('');
   const [files, setFiles] = useState([]);
+  const [previewUrls, setPreviewUrls] = useState([]);
 
   const fileToDataUrl = (file) => {
     return new Promise((resolve, reject) => {
@@ -89,8 +90,19 @@ export default function Register({ onCancel, onCreated }) {
         type="file"
         multiple
         accept="image/*"
-        onChange={(e) => setFiles(Array.from(e.target.files))}
+        onChange={(e) => {
+          const selected = Array.from(e.target.files);
+          setFiles(selected);
+          setPreviewUrls(selected.map((f) => URL.createObjectURL(f)));
+        }}
       />
+      {previewUrls.length > 0 && (
+        <div className="image-previews">
+          {previewUrls.map((url, idx) => (
+            <img key={idx} src={url} alt="preview" />
+          ))}
+        </div>
+      )}
       <input
         type="text"
         placeholder="Address"
