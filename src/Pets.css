@@ -123,11 +123,17 @@
   margin: 0 auto;
 }
 
-.profile-image img {
+.profile-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.5rem;
+}
+
+.profile-gallery img {
   width: 100%;
-  height: auto;
-  border-radius: 8px;
+  height: 150px;
   object-fit: cover;
+  border-radius: 8px;
 }
 
 .profile-details {
@@ -145,7 +151,7 @@
     flex-direction: row;
     align-items: flex-start;
   }
-  .profile-image,
+  .profile-gallery,
   .profile-details {
     flex: 1;
   }

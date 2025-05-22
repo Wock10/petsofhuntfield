@@ -45,8 +45,14 @@ export default function Pets() {
   if (selected) {
     return (
       <div className="pet-profile" onClick={() => setSelected(null)}>
-        <div className="profile-image">
-          <img src={selected.images[0] || 'https://via.placeholder.com/600x400'} alt={selected.name} />
+        <div className="profile-gallery">
+          {selected.images && selected.images.length > 0 ? (
+            selected.images.map((url, idx) => (
+              <img key={idx} src={url} alt={`${selected.name}-${idx}`} />
+            ))
+          ) : (
+            <img src="https://via.placeholder.com/600x400" alt={selected.name} />
+          )}
         </div>
         <div className="profile-details">
           <h2>{selected.name}</h2>
