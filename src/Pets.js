@@ -4,9 +4,14 @@ import './Pets.css';
 export default function Pets() {
   const [pets, setPets] = useState([]);
   const [selected, setSelected] = useState(null);
+  const [typeFilter, setTypeFilter] = useState('');
+  const [nameFilter, setNameFilter] = useState('');
 
   useEffect(() => {
-    fetch('/api/pets')
+    const params = new URLSearchParams();
+    if (typeFilter) params.append('type', typeFilter);
+    if (nameFilter) params.append('name', nameFilter);
+    fetch(`/api/pets?${params.toString()}`)
       .then(res => res.json())
       .then(data => setPets(data))
       .catch(() => {
@@ -22,7 +27,7 @@ export default function Pets() {
           },
         ]);
       });
-  }, []);
+  }, [typeFilter, nameFilter]);
 
   if (selected) {
     return (
@@ -41,25 +46,41 @@ export default function Pets() {
   }
 
   return (
-    <ul className="pet-list">
-      {pets.map(pet => (
-        <li
-          key={pet.id}
-          className="pet-card"
-          onClick={() => setSelected(pet)}
-        >
-          <div className="card-image">
-            <img
-              src={pet.images[0] || 'https://via.placeholder.com/300x200'}
-              alt={pet.name}
-            />
-          </div>
-          <div className="card-details">
-            <h3>{pet.name}</h3>
-            <p className="type">{pet.type}</p>
-          </div>
-        </li>
-      ))}
-    </ul>
+    <>
+      <div className="filters">
+        <input
+          type="text"
+          placeholder="Type"
+          value={typeFilter}
+          onChange={(e) => setTypeFilter(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Name"
+          value={nameFilter}
+          onChange={(e) => setNameFilter(e.target.value)}
+        />
+      </div>
+      <ul className="pet-list">
+        {pets.map(pet => (
+          <li
+            key={pet.id}
+            className="pet-card"
+            onClick={() => setSelected(pet)}
+          >
+            <div className="card-image">
+              <img
+                src={pet.images[0] || 'https://via.placeholder.com/300x200'}
+                alt={pet.name}
+              />
+            </div>
+            <div className="card-details">
+              <h3>{pet.name}</h3>
+              <p className="type">{pet.type}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 }

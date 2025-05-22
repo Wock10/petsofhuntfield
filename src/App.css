@@ -10,8 +10,27 @@
   gap: 1rem;
 }
 
+.App-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.branding {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.logo {
+  height: 50px;
+  width: auto;
+}
+
 .App h1 {
   color: var(--color-primary);
-  margin-bottom: 1rem;
+  margin-bottom: 0;
   font-size: 1.75rem;
 }
