@@ -11,7 +11,12 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <div className="branding" onClick={() => setPage('home')}> 
+        <div
+          className="branding"
+          onClick={() => {
+            window.location.href = '/';
+          }}
+        >
           <img className="logo" src={logoUrl} alt="Pets of Huntfield" />
           <h1>Pets of Huntfield</h1>
         </div>
