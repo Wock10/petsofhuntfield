@@ -1,9 +1,11 @@
 import './App.css';
+import Pets from './Pets';
 
 function App() {
   return (
     <div className="App">
-      <h1>Welcome to Pets of Huntfield</h1>
+      <h1>Pets of Huntfield</h1>
+      <Pets />
     </div>
   );
 }
