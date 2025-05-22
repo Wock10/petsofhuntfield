@@ -1,11 +1,26 @@
+import { useState } from 'react';
 import './App.css';
 import Pets from './Pets';
+import Register from './Register';
+
+const logoUrl = '/petsofhuntfield.png';
 
 function App() {
+  const [page, setPage] = useState('home');
+
   return (
     <div className="App">
-      <h1>Pets of Huntfield</h1>
-      <Pets />
+      <header className="App-header">
+        <div className="branding" onClick={() => setPage('home')}> 
+          <img className="logo" src={logoUrl} alt="Pets of Huntfield" />
+          <h1>Pets of Huntfield</h1>
+        </div>
+        <button onClick={() => setPage('register')}>Register</button>
+      </header>
+      {page === 'home' && <Pets />}
+      {page === 'register' && (
+        <Register onCancel={() => setPage('home')} onCreated={() => setPage('home')} />
+      )}
     </div>
   );
 }

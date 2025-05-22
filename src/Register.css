@@ -1,0 +1,22 @@
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.register-form h2 {
+  margin: 0 0 0.5rem;
+}
+
+.register-form input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.5rem;
+}
