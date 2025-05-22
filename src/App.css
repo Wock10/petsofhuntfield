@@ -1,1 +1,11 @@
 /* App styles */
+
+.App {
+  text-align: center;
+  padding: 2rem;
+}
+
+.App h1 {
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+}
