@@ -8,6 +8,18 @@ export default function Pets() {
   const [typeFilter, setTypeFilter] = useState('');
   const [nameFilter, setNameFilter] = useState('');
 
+  const handleDelete = async (pet) => {
+    const confirmation = window.prompt("Type 'delete this pet' to confirm");
+    if (confirmation !== 'delete this pet') return;
+    try {
+      await fetch(`/api/pets?id=${pet.id}`, { method: 'DELETE' });
+      setPets(pets.filter((p) => p.id !== pet.id));
+      setSelected(null);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   useEffect(() => {
     const params = new URLSearchParams();
     if (typeFilter) params.append('type', typeFilter);
@@ -41,6 +53,15 @@ export default function Pets() {
           <p className="type">{selected.type}</p>
           {selected.address && <p className="address">{selected.address}</p>}
           {selected.contact && <p className="contact">{selected.contact}</p>}
+          <button
+            className="remove-button"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleDelete(selected);
+            }}
+          >
+            Remove
+          </button>
         </div>
       </div>
     );

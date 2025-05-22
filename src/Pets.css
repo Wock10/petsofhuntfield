@@ -7,6 +7,20 @@
   gap: 1rem;
 }
 
+.remove-button {
+  background: #d9534f;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.remove-button:hover {
+  background: #c9302c;
+}
+
 @media (min-width: 600px) {
   .pet-list {
     grid-template-columns: repeat(2, 1fr);
