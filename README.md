@@ -88,3 +88,15 @@ Creates a new pet entry. The request body must be JSON with the following fields
 - `contact` (string)
 
 The API will generate a unique `id` for each pet on creation.
+
+### `POST /api/petsMiddleware`
+
+Uploads base64 encoded images to an S3 bucket and creates a database record in `public.pets`. The request body must include:
+
+- `name` (string, required)
+- `type` (string, required)
+- `images` (array of base64 strings or a single base64 string)
+- `address` (string)
+- `contact` (string)
+
+This endpoint requires AWS and PostgreSQL credentials via environment variables: `AWS_REGION`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `S3_BUCKET_NAME`, `PGHOST`, `PGUSER`, `PGPASSWORD`, `PGDATABASE` and `PGPORT`.
