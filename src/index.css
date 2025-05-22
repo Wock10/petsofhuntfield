@@ -1,1 +1,47 @@
-/* Base styles */
+/* Global styles */
+
+:root {
+  --color-primary: #4b585e;
+  --color-secondary: #ff7f11;
+  --color-tertiary: #77b6c9;
+  --font-base: Arial, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-base);
+  color: var(--color-primary);
+  background-color: #fff;
+}
+
+a {
+  color: var(--color-secondary);
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-primary);
+  font-weight: normal;
+  margin: 0;
+}
+
+button {
+  background-color: var(--color-primary);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button.secondary {
+  background-color: var(--color-secondary);
+}
+
+button.tertiary {
+  background-color: var(--color-tertiary);
+}
