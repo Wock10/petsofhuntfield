@@ -68,3 +68,23 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## API Routes
+
+This project exposes serverless functions in the `api/` folder when deployed to Vercel.
+
+### `GET /api/pets`
+
+Returns the list of pets. Optional query parameters `id`, `type`, and `name` can be provided to filter the results.
+
+### `POST /api/pets`
+
+Creates a new pet entry. The request body must be JSON with the following fields:
+
+- `name` (string, required)
+- `type` (string, required)
+- `images` (array of string URLs)
+- `address` (string)
+- `contact` (string)
+
+The API will generate a unique `id` for each pet on creation.
