@@ -1,0 +1,17 @@
+export const COMMON_PETS = [
+  'Dog',
+  'Cat',
+  'Fish',
+  'Bird',
+  'Hamster',
+  'Guinea Pig',
+  'Rabbit',
+  'Turtle',
+  'Lizard',
+  'Snake',
+  'Frog',
+  'Horse',
+  'Ferret',
+  'Gerbil',
+  'Hermit Crab',
+];

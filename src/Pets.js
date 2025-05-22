@@ -1,23 +1,6 @@
 import { useEffect, useState } from 'react';
 import './Pets.css';
-
-const COMMON_PETS = [
-  'Dog',
-  'Cat',
-  'Fish',
-  'Bird',
-  'Hamster',
-  'Guinea Pig',
-  'Rabbit',
-  'Turtle',
-  'Lizard',
-  'Snake',
-  'Frog',
-  'Horse',
-  'Ferret',
-  'Gerbil',
-  'Hermit Crab',
-];
+import { COMMON_PETS } from './petTypes';
 
 export default function Pets() {
   const [pets, setPets] = useState([]);
