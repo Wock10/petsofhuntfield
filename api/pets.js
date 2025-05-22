@@ -1,21 +1,17 @@
-const { randomUUID } = require('crypto');
-
-let pets = [];
+const supabase = require('../supabase');
 
 module.exports = async (req, res) => {
   if (req.method === 'GET') {
     const { id, type, name } = req.query;
-    let results = pets;
-    if (id) {
-      results = results.filter(p => p.id === id);
+    let query = supabase.from('pets').select('*');
+    if (id) query = query.eq('id', id);
+    if (type) query = query.eq('type', type);
+    if (name) query = query.eq('name', name);
+    const { data, error } = await query;
+    if (error) {
+      return res.status(500).json({ error: error.message });
     }
-    if (type) {
-      results = results.filter(p => p.type === type);
-    }
-    if (name) {
-      results = results.filter(p => p.name === name);
-    }
-    return res.status(200).json(results);
+    return res.status(200).json(data);
   } else if (req.method === 'POST') {
     let body = req.body;
     if (!body || typeof body === 'string') {
@@ -29,16 +25,15 @@ module.exports = async (req, res) => {
     if (!name || !type) {
       return res.status(400).json({ error: 'Name and type are required' });
     }
-    const pet = {
-      id: randomUUID(),
-      name,
-      type,
-      images,
-      address,
-      contact,
-    };
-    pets.push(pet);
-    return res.status(201).json(pet);
+    const { data, error } = await supabase
+      .from('pets')
+      .insert({ name, type, images, address, contact })
+      .select()
+      .single();
+    if (error) {
+      return res.status(500).json({ error: error.message });
+    }
+    return res.status(201).json(data);
   } else {
     res.status(405).json({ error: 'Method Not Allowed' });
   }
