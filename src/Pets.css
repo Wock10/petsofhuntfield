@@ -95,6 +95,13 @@
   justify-content: center;
 }
 
+@media (min-width: 600px) {
+  .card-details {
+    align-items: center;
+    text-align: center;
+  }
+}
+
 .card-details .type {
   color: var(--color-secondary);
   font-weight: bold;
