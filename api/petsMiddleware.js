@@ -59,7 +59,7 @@ module.exports = async (req, res) => {
   try {
     uploadedUrls = await Promise.all(imageArray.map(uploadImage));
   } catch (err) {
-    return res.status(500).json({ error: 'Failed to upload images' });
+    return res.status(500).json({ error: err.message || 'Failed to upload images' });
   }
 
   const petId = randomUUID();
@@ -70,7 +70,7 @@ module.exports = async (req, res) => {
       [petId, name, type, uploadedUrls, address, contact]
     );
   } catch (err) {
-    return res.status(500).json({ error: 'Database error' });
+    return res.status(500).json({ error: err.message || 'Database error' });
   } finally {
     client.release();
   }

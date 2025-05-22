@@ -45,3 +45,8 @@
   border-radius: 4px;
   border: 1px solid #ccc;
 }
+
+.error {
+  color: #d9534f;
+  margin: 0;
+}
