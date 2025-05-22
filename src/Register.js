@@ -10,6 +10,7 @@ export default function Register({ onCancel, onCreated }) {
   const [contact, setContact] = useState('');
   const [files, setFiles] = useState([]);
   const [previewUrls, setPreviewUrls] = useState([]);
+  const [error, setError] = useState('');
 
   const fileToDataUrl = (file) => {
     return new Promise((resolve, reject) => {
@@ -22,6 +23,7 @@ export default function Register({ onCancel, onCreated }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
 
     let uploadedUrls = [];
     if (files.length) {
@@ -36,9 +38,14 @@ export default function Register({ onCancel, onCreated }) {
         if (uploadRes.ok) {
           const data = await uploadRes.json();
           uploadedUrls = data.urls || [];
+        } else {
+          const data = await uploadRes.json().catch(() => ({}));
+          throw new Error(data.error || 'Failed to upload images');
         }
       } catch (err) {
         console.error(err);
+        setError(err.message || 'Failed to upload images');
+        return;
       }
     }
 
@@ -56,19 +63,22 @@ export default function Register({ onCancel, onCreated }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
-      if (res.ok) {
-        if (onCreated) onCreated();
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        throw new Error(data.error || 'Failed to register pet');
       }
+      if (onCreated) onCreated();
+      if (onCancel) onCancel();
     } catch (err) {
       console.error(err);
-    } finally {
-      if (onCancel) onCancel();
+      setError(err.message || 'Failed to register pet');
     }
   };
 
   return (
     <form className="register-form" onSubmit={handleSubmit}>
       <h2>Register Your Pet</h2>
+      {error && <p className="error">{error}</p>}
       <input
         type="text"
         placeholder="Name"
