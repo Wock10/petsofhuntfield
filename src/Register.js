@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './Register.css';
 import { COMMON_PETS } from './petTypes';
+import imageCompression from 'browser-image-compression';
 
 export default function Register({ onCancel, onCreated }) {
   const [name, setName] = useState('');
@@ -25,7 +26,8 @@ export default function Register({ onCancel, onCreated }) {
     let uploadedUrls = [];
     if (files.length) {
       try {
-        const base64Images = await Promise.all(files.map(fileToDataUrl));
+        const compressedFiles = await Promise.all(files.map(file => imageCompression(file, { maxSizeMB: 1, maxWidthOrHeight: 1280, useWebWorker: true })));
+        const base64Images = await Promise.all(compressedFiles.map(fileToDataUrl));
         const uploadRes = await fetch('/api/uploadImages', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
