@@ -100,3 +100,13 @@ Uploads base64 encoded images to an S3 bucket and creates a database record in `
 - `contact` (string)
 
 This endpoint requires AWS and PostgreSQL credentials via environment variables: `AWS_REGION`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `S3_BUCKET_NAME`, `PGHOST`, `PGUSER`, `PGPASSWORD`, `PGDATABASE` and `PGPORT`.
+
+### `POST /api/uploadImages`
+
+Uploads image files to an S3 bucket and returns their public URLs. The request body must be JSON with an `images` field containing one or more base64 encoded image strings. Only `png`, `jpg`, `jpeg`, `webp` and `avif` images are accepted.
+
+The response will be of the form:
+
+```json
+{ "urls": ["https://..."] }
+```
