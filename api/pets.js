@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
     let query = supabase.from('pets').select('*');
     if (id) query = query.eq('id', id);
     if (type) query = query.eq('type', type);
-    if (name) query = query.eq('name', name);
+    if (name) query = query.ilike('name', `%${name}%`);
     const { data, error } = await query;
     if (error) {
       return res.status(500).json({ error: error.message });

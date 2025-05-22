@@ -1,6 +1,24 @@
 import { useEffect, useState } from 'react';
 import './Pets.css';
 
+const COMMON_PETS = [
+  'Dog',
+  'Cat',
+  'Fish',
+  'Bird',
+  'Hamster',
+  'Guinea Pig',
+  'Rabbit',
+  'Turtle',
+  'Lizard',
+  'Snake',
+  'Frog',
+  'Horse',
+  'Ferret',
+  'Gerbil',
+  'Hermit Crab',
+];
+
 export default function Pets() {
   const [pets, setPets] = useState([]);
   const [selected, setSelected] = useState(null);
@@ -48,12 +66,14 @@ export default function Pets() {
   return (
     <>
       <div className="filters">
-        <input
-          type="text"
-          placeholder="Type"
-          value={typeFilter}
-          onChange={(e) => setTypeFilter(e.target.value)}
-        />
+        <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)}>
+          <option value="">All Types</option>
+          {COMMON_PETS.map((type) => (
+            <option key={type} value={type}>
+              {type}
+            </option>
+          ))}
+        </select>
         <input
           type="text"
           placeholder="Name"
