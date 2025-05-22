@@ -3,7 +3,7 @@ import './App.css';
 import Pets from './Pets';
 import Register from './Register';
 
-const logoUrl = '/petsofhuntfield.png';
+const logoUrl = '/cat_head_only.svg';
 
 function App() {
   const [page, setPage] = useState('home');
